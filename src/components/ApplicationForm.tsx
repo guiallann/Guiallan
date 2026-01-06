@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { AppStatus } from '../types';
 import { Loader2 } from 'lucide-react';
@@ -159,12 +160,25 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({ onSubmit, status }) =
             </select>
           </div>
           <div>
-            <label className={labelClasses}>3. Métricas de decisão priorizadas hoje?</label>
+            <label className="block text-[16px] font-tusker text-zinc-200 uppercase tracking-[0.2em] mb-6">3. Métricas de decisão priorizadas hoje?</label>
             <div className="flex flex-wrap gap-4">
               {["CAC", "LTV", "Churn", "Margem", "ROI", "Receita"].map(m => (
-                <button type="button" key={m} onClick={() => handleMetricaToggle(m)} className={`px-8 py-4 rounded-full text-base font-tusker uppercase tracking-widest transition-all ${formData.metricas.includes(m) ? 'bg-glow-acid text-black' : 'bg-zinc-800 text-zinc-500 hover:text-zinc-200 border border-white/5'}`}>
+                <label 
+                  key={m} 
+                  className={`cursor-pointer px-8 py-4 rounded-full text-base font-tusker uppercase tracking-widest transition-all duration-300 border ${
+                    formData.metricas.includes(m) 
+                      ? 'bg-glow-acid text-black border-glow-acid shadow-[0_0_20px_rgba(204,255,0,0.2)]' 
+                      : 'bg-zinc-900/60 text-zinc-500 hover:text-zinc-200 border-white/5 hover:border-white/20'
+                  }`}
+                >
+                  <input 
+                    type="checkbox" 
+                    className="sr-only" 
+                    checked={formData.metricas.includes(m)}
+                    onChange={() => handleMetricaToggle(m)}
+                  />
                   {m}
-                </button>
+                </label>
               ))}
             </div>
           </div>
